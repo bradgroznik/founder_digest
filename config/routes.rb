@@ -29,7 +29,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get '/', to: 'pages#dashboard' 
+    get '/', to: 'pages#dashboard'
+    resources :user_submissions, only: [:update] 
   end
 
   
