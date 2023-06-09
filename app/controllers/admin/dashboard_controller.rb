@@ -3,7 +3,7 @@ class Admin::DashboardController < ApplicationController
 
   def index
     # @users = User.all.order(created_at: :desc)
-    @user_submissions = UserSubmission.all 
+    @user_submissions = UserSubmission.all.order(created_at: :desc)
     # .order(created_at: :desc)
   end
 end
