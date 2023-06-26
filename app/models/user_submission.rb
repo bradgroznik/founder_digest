@@ -4,15 +4,28 @@ class UserSubmission < ApplicationRecord
     validates_presence_of :first_name, :last_name, :email, :website, :job_role, :text
     validates :plan_name, inclusion: { in: PLAN_NAMES }
 
-    after_update :send_mailer
+    after_update :finish_processing
 
     def name
         "#{first_name} #{last_name}"
     end
 
-    def send_mailer
-            puts "SENDING MAILER..."
-            UserSubmissionMailer.reject(self).deliver if status == 'Reject'
-            UserSubmissionMailer.accept(self).deliver if status == 'Accept'
-        end
-      end
+    def finish_processing
+        reject! if status == 'Reject'
+        accept! if status == 'Accept'
+    end
+
+    def reject!
+        UserSubmissionMailer.reject(self).deliver
+    end
+
+    def accept!
+        password = generate_password
+        created_user = User.create!(email: self.email, password: password)
+        UserSubmissionMailer.accept(self, created_user).deliver
+    end
+
+    def generate_password
+        SecureRandom.hex(10)
+    end
+end
