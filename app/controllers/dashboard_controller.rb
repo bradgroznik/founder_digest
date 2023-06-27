@@ -1,7 +1,9 @@
 class DashboardController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_flashes
 
   def index
+    @project = current_user.projects.first
   end
 
   private

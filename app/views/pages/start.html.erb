@@ -1,14 +1,16 @@
 <%= render partial: "shared/heading", locals: {title: 'Welcome to Founder Digest', tagline: 'Congrats on being accepted to our private community!<br>Provide just a few more details to begin receiving stakeholder updates in your email.'} %>
 <div class="max-w-md mx-auto">
+  <%= form_for Project.new do |f| %>
+
   <form>
   <div class="space-y-12">
     <div class="mt-3 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
       <div class="sm:col-span-3">
         </div>
           <div class="sm:col-span-6">
-            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">What is your stakeholder update called?</label>
+            <label for="title" class="block text-sm font-medium leading-6 text-gray-900">What is your stakeholder update called?</label>
             <div class="mt-2">
-              <input id="email" name="email" type="text" placeholder="Groznik PR monthly update" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input id="project_title" name="project[title]" type="text" placeholder="Groznik PR monthly update" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
             <p class="mt-3 text-sm leading-6 text-gray-600">Simply your company will do or a brief description, e.g., “B2B SaaS bootstrapped startup”</p>
           </div>
@@ -16,15 +18,16 @@
           </div>
         </div>
       <div class="col-span-full">
-        <label for="about" class="block text-sm font-medium leading-6 text-gray-900">Please describe your updates in 15 words or fewer</label>
+        <label for="description" class="block text-sm font-medium leading-6 text-gray-900">Please describe your updates in 15 words or fewer</label>
         <div class="mt-2">
-          <textarea id="about" name="about" maxlength=150 placeholder="Fomo is a bootstrapped SaaS with product led growth and monthly marketing experiments." rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+          <textarea id="project_description" name="project[description]" maxlength=150 placeholder="Fomo is a bootstrapped SaaS with product led growth and monthly marketing experiments." rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
         </div>
-      </div>
+      </div>  
     </div>
       <div class="mt-6 flex items-center justify-end gap-x-6">
         <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent bg-brand-blue hover:bg-brand-blue-dark  py-2 px-4 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Continue to Dashboard</button>
       </div>
   </form>
+  <% end %>
 </div>
 
