@@ -3,8 +3,8 @@ class DashboardController < ApplicationController
   before_action :set_flashes
 
   def index
-    @project = current_user.projects.first
-    @other_projects = Project.all
+    @project = current_user.default_project
+    @other_projects = Project.ready.except(@project)
   end
 
   private

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   resources :user_submissions, only: [:create]
   resources :projects, only: [:update]
+  resources :subscriptions, only: [:create, :destroy]
 
 
   # static pages 
