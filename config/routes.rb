@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'dashboard#index'
   
   resources :stakeholder_updates, only: [:new, :show, :create, :update]  
+  
+  resources :updates, only: [:show]  
 
   resources :account, only: [:index, :update]
   resources :billing_portal, only: [:create]

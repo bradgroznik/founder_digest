@@ -14,10 +14,12 @@
       </div>
     </div>
     <div class="basis-1/2 text-right">
-      <p>{{ Num }} Subscribers</p>
+      <p><%= @project.subscriptions.count %> Subscriptions </p>
       <p>
         <a href="<%= new_stakeholder_update_path %>" class="text-brand-orange underline">Write an update</a>
+        <% unless current_user.stakeholder_updates.count.zero? %>
         | <a href="<%= stakeholder_update_path(current_user.stakeholder_updates.last) %>" class="text-brand-orange underline">View last</a>
+        <% end %>
       </p>
       <p><a href="" class="text-brand-blue underline">Edit subscription</a></p>
     </div>

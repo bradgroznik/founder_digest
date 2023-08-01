@@ -1,7 +1,7 @@
 class Project < ApplicationRecord
   belongs_to :user
-  has_many :stakeholder_updates
-  has_many :subscriptions
+  has_many :stakeholder_updates, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
 
   scope :ready, -> { where.not(title: nil).where.not(website: nil).where.not(description: nil)}
   
@@ -9,4 +9,7 @@ class Project < ApplicationRecord
     where.not(id: project.id)    
   end
 
+  def latest_stakeholder_update
+    stakeholder_updates.order(created_at: :desc).first    
+  end
 end
