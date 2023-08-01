@@ -12,6 +12,7 @@ class DigestService
 
     def call
         return unless wrote_recent_update?
+        
         UserMailer.digests(user, stakeholder_updates).deliver
     end
 
