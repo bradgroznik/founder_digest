@@ -26,9 +26,9 @@ class BillingPortalController < ApplicationController
       allow_promotion_codes: true,
       line_items: [{
         quantity: 1,
-        price: ENV['STRIPE_PRODUCT_PRICE_ID']
+        price: 'price_1NexwVI2zBStTvQb9yVXfjbi' #ENV['STRIPE_PRODUCT_PRICE_ID']
       }],
-      success_url: "#{ENV['BASE_URL']}#{dashboard_index_path}?subscribed=true",
+      success_url: "#{ENV['BASE_URL']}#{dashboard_path}?subscribed=true",
       cancel_url: "#{ENV['BASE_URL']}#{account_index_path}?aborted=true"
     })
 
@@ -39,7 +39,7 @@ class BillingPortalController < ApplicationController
   def modify_subscription
     session = Stripe::BillingPortal::Session.create({
       customer: current_user.stripe_customer_id,
-      return_url: "#{ENV['BASE_URL']}/#{account_index_path}?updated=true"
+      return_url: "#{ENV['BASE_URL']}#{account_index_path}?updated=true"
     })
 
     session.url
