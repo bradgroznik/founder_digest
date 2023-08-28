@@ -35,13 +35,9 @@ Rails.application.routes.draw do
     get "/#{page}", to: "pages##{page}", as: "#{page.gsub('-', '_')}"
   end
 
-  namespace :admin do
-    get '/', to: 'pages#dashboard'
-    resources :user_submissions, only: [:update] 
-  end
-
   authenticated :user, -> user { user.admin? } do
-    get 'terms', to: 'pages#terms'
+    namespace :admin do
+      get '/', to: 'pages#dashboard'
+      resources :user_submissions, only: [:update]
   end
-
 end
