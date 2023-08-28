@@ -2,6 +2,7 @@ class AccountController < ApplicationController
   before_action :authenticate_user!
   before_action :set_flashes
 
+
   def index
   end
 
@@ -18,6 +19,10 @@ class AccountController < ApplicationController
   end
 
   def set_flashes
+    if params[:subscribed] == 'true'
+      current_user.delay.set_stripe_subscription
+      flash.now[:notice] = 'Your account is now active!'
+    end
     flash.now[:alert] = 'Subscription declined' if params[:aborted] == 'true'
     flash.now[:notice] = 'Subscription updated successfully' if params[:updated] == 'true'
   end

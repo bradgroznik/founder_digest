@@ -25,4 +25,14 @@ class User < ApplicationRecord
   def finished_onboarding?
     stripe_subscription_id?
   end
+
+  def pro_plan?
+    plan_name == 'pro'
+  end
+
+  def has_started_subscription?
+    return true unless pro_plan?
+    stripe_subscription_id?
+    
+  end
 end

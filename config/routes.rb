@@ -7,11 +7,12 @@ Rails.application.routes.draw do
 
   devise_for :users
   get 'logout', to: 'pages#logout', as: 'logout'
+  get 'login', to: redirect(path: '/users/sign_in')
 
   resources :subscribe, only: [:index]
   get 'dashboard', to: 'dashboard#index'
   
-  resources :stakeholder_updates, only: [:new, :show, :create, :update]  
+  resources :stakeholder_updates, only: [:new, :show, :edit, :create, :update]  
   
   resources :updates, only: [:show]  
 
@@ -39,6 +40,8 @@ Rails.application.routes.draw do
     resources :user_submissions, only: [:update] 
   end
 
-  
+  authenticated :user, -> user { user.admin? } do
+    get 'terms', to: 'pages#terms'
+  end
 
 end

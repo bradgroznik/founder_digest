@@ -28,7 +28,7 @@ class BillingPortalController < ApplicationController
         quantity: 1,
         price: 'price_1NexwVI2zBStTvQb9yVXfjbi' #ENV['STRIPE_PRODUCT_PRICE_ID']
       }],
-      success_url: "#{ENV['BASE_URL']}#{dashboard_path}?subscribed=true",
+      success_url: "#{ENV['BASE_URL']}#{account_index_path}?subscribed=true",
       cancel_url: "#{ENV['BASE_URL']}#{account_index_path}?aborted=true"
     })
 
